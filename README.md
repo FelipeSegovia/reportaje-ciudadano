@@ -10,3 +10,4 @@ App para reportar incidencias a traves de los ciudadanos, mediante imagenes, ubi
 - [React DOM](https://reactrouter.com/start/data/installation)
 - [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction)
 - [Vite](https://vite.dev/guide/)
+- [Shadcn](https://ui.shadcn.com/docs/installation/vite) (Para prototipar)
