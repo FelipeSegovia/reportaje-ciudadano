@@ -4,10 +4,11 @@ App para reportar incidencias a traves de los ciudadanos, mediante imagenes, ubi
 
 ## Librerías utilizadas
 
+- [React v18](https://18.react.dev/)
 - [Tanstack Query](https://tanstack.com/query/latest/docs/framework/react/installation)
 - [React Hook Form](https://react-hook-form.com/get-started)
 - [Tailwind](https://tailwindcss.com/docs/installation/using-vite)
-- [React DOM](https://reactrouter.com/start/data/installation)
+- [React Router](https://reactrouter.com/start/data/installation)
 - [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction)
 - [Vite](https://vite.dev/guide/)
 - [Shadcn](https://ui.shadcn.com/docs/installation/vite) (Para prototipar)

@@ -1,3 +1,4 @@
+import { useForm } from 'react-hook-form';
 import { cn } from '@/lib/utils';
 import PlaceholderImg from './../../assets/placeholder.svg';
 import { Link } from 'react-router';
@@ -6,15 +7,35 @@ import { Label } from '@radix-ui/react-label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
+interface FormInputProps {
+  email: string;
+  password: string;
+}
+
 export const LoginPage = ({
   className,
   ...props
 }: React.ComponentProps<'div'>) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInputProps>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+
+  const onSubmit = (data: FormInputProps) => {
+    console.log(data);
+  };
+
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8">
+          <form className="p-6 md:p-8" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold">Bienvenido</h1>
@@ -28,8 +49,22 @@ export const LoginPage = ({
                   id="email"
                   type="email"
                   placeholder="m@example.com"
-                  required
+                  {...register('email', {
+                    required: true,
+                    maxLength: 50,
+                    pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  })}
                 />
+                {errors.email && (
+                  <span className="text-red-500 text-sm">
+                    {errors.email.type === 'required' &&
+                      'El correo es requerido'}
+                    {errors.email.type === 'maxLength' &&
+                      'El correo es muy largo'}
+                    {errors.email.type === 'pattern' &&
+                      'El correo no es válido'}
+                  </span>
+                )}
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
@@ -41,7 +76,21 @@ export const LoginPage = ({
                     ¿Olvidaste tu contraseña?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input
+                  id="password"
+                  type="password"
+                  {...register('password', { required: true, maxLength: 20 })}
+                />
+                {
+                  errors.password && (
+                    <span className="text-red-500 text-sm">
+                      {errors.password.type === 'required' &&
+                        'La contraseña es requerida'}
+                      {errors.password.type === 'maxLength' &&
+                        'La contraseña es muy larga'}
+                    </span>
+                  )
+                }
               </div>
               <Button type="submit" className="w-full">
                 Ingresar
